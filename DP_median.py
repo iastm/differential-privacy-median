@@ -36,12 +36,13 @@ def DP_median(
         shorten the intervals between candidate
         values down to 1/frac.
     """
-    x = x.copy()
     candidates = []
     for y in range((U-L)*frac):
         y = y / frac + L
         candidates.append(
             [q(x, y) + scipy.stats.expon.rvs(scale=2/epsilon), y]
         )
-    candidates.append([q(x, U)+scipy.stats.expon.rvs(scale=2/epsilon), U])
+    candidates.append(
+        [q(x, U) + scipy.stats.expon.rvs(scale=2/epsilon), U]
+    )
     return max(candidates)[1]
